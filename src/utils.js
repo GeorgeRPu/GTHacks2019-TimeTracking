@@ -21,9 +21,4 @@ function durationBetween(date1, date2) {
     return dayjs.duration(date2.diff(date1));
 }
 
-function ts2d(timestamp) {
-    return dayjs(timestamp.toDate());
-}
-
-
-export {dateString, dayOfWeek, timeString, durationString, durationBetween, ts2d};
+export {dateString, dayOfWeek, timeString, durationString, durationBetween};

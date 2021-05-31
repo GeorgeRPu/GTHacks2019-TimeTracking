@@ -24,6 +24,17 @@ ul {
   display: inline-block;
 }
 
+input[type ="text"] {
+  width: 100%;
+  padding: 5px;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 .label {
   font-weight: bold;
 }
@@ -34,11 +45,13 @@ ul {
 
 .Day {
   border: 2px solid;
+  width: 14.2%;
 }
 
 .Day-inactive {
   border: 1px solid;
   color: grey;
+  width: 14.2%;
 }
 
 .Week {

@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { PieChart,  Pie, Cell, Legend, Tooltip, } from 'recharts';
 
 const colors = ["Blue", "Orange", "Green", "Red"];
-
 
 class ActivityPie extends React.Component {
     render() {
@@ -25,5 +25,8 @@ class ActivityPie extends React.Component {
     }
 }
 
+ActivityPie.propTypes = {
+    data: PropTypes.array
+}
 
 export default ActivityPie;

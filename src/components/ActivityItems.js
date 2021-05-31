@@ -1,5 +1,8 @@
 import React from 'react';
-import * as utils from './utils';
+import PropTypes from 'prop-types';
+
+import dayjs, { Dayjs } from 'dayjs';
+import * as utils from 'utils';
 
 class ActivityItem extends React.Component {
     render () {
@@ -29,16 +32,21 @@ class ActivityItem extends React.Component {
         );
     }
 }
+ActivityItem.propTypes = {
+    name: PropTypes.string,
+    start: Dayjs,
+    end: Dayjs,
+}
 
 class ActivityItems extends React.Component {
     render() {
         const activityItems = this.props.activity.map(item => {
             return (
-                <li key={utils.timeString(utils.ts2d(item.start))}>
+                <li key={utils.timeString(dayjs(item.start))}>
                     <ActivityItem
                         name={item.name}
-                        start={utils.ts2d(item.start)}
-                        end={utils.ts2d(item.end)}
+                        start={dayjs(item.start)}
+                        end={dayjs(item.end)}
                     />
                 </li>
             );
@@ -49,6 +57,11 @@ class ActivityItems extends React.Component {
             </div>
         );
     }
+}
+
+ActivityItems.propTypes = {
+    name: PropTypes.string,
+    activity: PropTypes.array,
 }
 
 export default ActivityItems;

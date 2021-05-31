@@ -1,11 +1,33 @@
-# TimeTracker
+# TimeTrackr
+
+## Component Architecture
+
+```mermaid
+graph LR
+    App --> Week;
+    Week --> Day;
+    Day --> ActivityForm;
+    Day --> ActivityItems;
+    Day --> ActivityPie;
+```
+
+## Database Structure
+
+### SQLite
+
+Activity(name VARCHAR(100), start TEXT, end TEXT)
+
+*start* and *end* are ISO 8601 timestamps
+
 
 ## Technologies Used
 
+- Day.js
+- Firebase (If using GCP)
 - React
-- Firebase
 - Recharts
-- MomentJS
+- Sequelize (If using SQLite)
+- SQLite3 (If using SQLite)
 
 ## Todo
 

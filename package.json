@@ -1,14 +1,15 @@
 {
-  "name": "frontend",
+  "name": "timetrackr",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^7.2.2",
-    "moment": "^2.24.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0",
-    "recharts": "^1.8.5"
+    "dayjs": "^1.10.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "recharts": "^2.0.9",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +31,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-plugin-react": "^7.24.0"
   }
 }
