@@ -1,4 +1,5 @@
 import React from 'react';
+import {addActivity} from 'db/supabase/supabase';
 
 class ActivityForm extends React.Component {
     constructor(props) {
@@ -6,7 +7,7 @@ class ActivityForm extends React.Component {
         this.state = {
             name: "",
             start: "",
-            end: "",
+            end: ""
         }
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleStartChange = this.handleStartChange.bind(this);
@@ -27,7 +28,7 @@ class ActivityForm extends React.Component {
     }
 
     handleSubmit(event) {
-        // TODO
+        addActivity(this.state.name, this.state.start, this.state.end);
         event.preventDefault();
     }
 

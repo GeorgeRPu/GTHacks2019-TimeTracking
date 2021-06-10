@@ -4,9 +4,8 @@ import ActivityForm from 'components/ActivityForm';
 import ActivityItems from 'components/ActivityItems';
 import ActivityPie from 'components/ActivityPie';
 
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import * as utils from 'utils';
-// import { getActivitiesForDay } from 'db/sql/sqlite';
 
 class Day extends React.Component {
     constructor(props) {
@@ -45,10 +44,10 @@ class Day extends React.Component {
 
     render() {
         return (
-            <div className={dayjs().isSame(this.props.dayjs, "day") ? "Day" : "Day-inactive"}>
-                <h2>{this.props.dayjs.format("YYYY-MM-DD")} ({utils.dayOfWeek(this.props.dayjs)})</h2>
+            <div className={dayjs().isSame(this.props.day, "day") ? "Day" : "Day-inactive"}>
+                <h2>{this.props.day.format("YYYY-MM-DD")} ({utils.dayOfWeek(this.props.day)})</h2>
                 <ActivityItems activity={this.state.activity} />
-                <ActivityForm dayjs={this.props.dayjs} />
+                <ActivityForm day={this.props.day} />
                 <ActivityPie data={this.state.summary} />
             </div>
         )
@@ -56,7 +55,7 @@ class Day extends React.Component {
 }
 
 Day.propTypes = {
-    dayjs: Dayjs,
+    day: PropTypes.object,
     activity: PropTypes.array,
     summary: PropTypes.array
 }

@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'index.css';
 import * as serviceWorker from 'serviceWorker';
+import Week from 'components/Week';
 
 import dayjs from 'dayjs';
-import Week from 'components/Week';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dayjs: dayjs(),
+            now: dayjs(),
         }
         this.handleNextClick = this.handleNextClick.bind(this);
         this.handlePrevClick = this.handlePrevClick.bind(this);
@@ -29,7 +29,7 @@ class App extends React.Component {
             <h1>Time Trackr</h1>
             <button className="nav-button" onClick={this.handlePrevClick}>Prev week</button>
             <button className="nav-button" onClick={this.handleNextClick}>Next week</button>
-            <Week dayjs={this.state.dayjs} />
+            <Week now={this.state.now} />
         </div>
     }
 }
