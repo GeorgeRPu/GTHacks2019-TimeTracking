@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'index.css';
 import * as serviceWorker from 'serviceWorker';
-import Week from 'components/Week';
 
+import Week from 'components/week';
 import dayjs from 'dayjs';
 
 class App extends React.Component {
@@ -17,11 +17,11 @@ class App extends React.Component {
     }
 
     handlePrevClick() {
-        this.setState({dayjs: this.state.dayjs.subtract(1, "weeks").clone()});
+        this.setState({now: this.state.now.subtract(1, "weeks").clone()});
     }
 
     handleNextClick() {
-        this.setState({dayjs: this.state.dayjs.add(1, "weeks").clone()});
+        this.setState({now: this.state.now.add(1, "weeks").clone()});
     }
 
     render() {

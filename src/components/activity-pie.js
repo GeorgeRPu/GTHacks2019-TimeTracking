@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PieChart,  Pie, Cell, Legend, Tooltip, } from 'recharts';
 
-const colors = ["Blue", "Orange", "Green", "Red"];
+const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'];
 
 class ActivityPie extends React.Component {
     render() {
@@ -14,7 +14,7 @@ class ActivityPie extends React.Component {
                         data.map((entry, index) => {
                             return <Cell
                                 key={"cell" + index}
-                                fill={entry.name === "blank" ? "WhiteSmoke" : colors[index % colors.length]} />;
+                                fill={entry.name === "blank" ? "Grey" : colors[index % colors.length]} />;
                         })
                     }
                 </Pie>

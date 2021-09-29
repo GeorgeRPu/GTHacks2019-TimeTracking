@@ -1,5 +1,10 @@
 # TimeTrackr
 
+- Day.js
+- Firebase
+- React
+- Recharts
+
 ## Component Architecture
 
 ```mermaid
@@ -13,22 +18,6 @@ graph LR
 
 ## Database Structure
 
-### SQLite
-
-Activity(name VARCHAR(100), start TEXT, end TEXT)
-
-*start* and *end* are ISO 8601 timestamps
-
-
-## Technologies Used
-
-- Day.js
-- Firebase (If using GCP)
-- React
-- Recharts
-- Sequelize (If using SQLite)
-- SQLite3 (If using SQLite)
-
 ## Todo
 
 - [x] Users can see their activity for a day as a list
@@ -39,4 +28,4 @@ Activity(name VARCHAR(100), start TEXT, end TEXT)
     - [x] Day
     - [ ] Week
 - [ ] Users can edit entered activity
-- [ ] Users have individual accounts whose data is isolated from others
+- [ ] Looks pretty

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ActivityForm from 'components/ActivityForm';
-import ActivityItems from 'components/ActivityItems';
-import ActivityPie from 'components/ActivityPie';
+import ActivityForm from 'components/activity-form';
+import ActivityItems from 'components/activity-items';
+import ActivityPie from 'components/activity-pie';
 
 import dayjs from 'dayjs';
-import * as utils from 'utils';
+import { getActivities } from 'db/firebase';
 
 class Day extends React.Component {
     constructor(props) {
@@ -20,32 +20,36 @@ class Day extends React.Component {
         let summaryMap = new Map();
         let blank = dayjs.duration(24, "hours");
         for (const item of activity) {
+            const name = item.name.toLowerCase();
             let prev = dayjs.duration(0);
-            if (summaryMap.has(item.name)) {
-                prev = summaryMap.get(item.name);
+            if (summaryMap.has(name)) {
+                prev = summaryMap.get(name);
             }
-            const duration = utils.durationBetween(dayjs(item.start), dayjs(item.end));
+            const start = dayjs.unix(item.start.seconds);
+            const end = dayjs.unix(item.end.seconds);
+            const duration = end.diff(start);
             blank = blank.subtract(duration);
-            summaryMap.set(item.name, prev.add(duration));
+            summaryMap.set(name, prev.add(duration));
         }
         let summary = [];
         for (const [name, duration] of summaryMap) {
-            const asHours = parseFloat(duration.asHours().toFixed(2));
-            summary.push({"name": name, "value": asHours});
+            summary.push({"name": name, "value": parseFloat(duration.asHours().toFixed(2))});
         }
-        const blankAsHours = parseFloat(blank.asHours().toFixed(2));
-        summary.push({"name": "blank", "value": blankAsHours})
+        summary.push({"name": "blank", "value": parseFloat(blank.asHours().toFixed(2))})
         return summary;
     }
 
-    componentDidMount() {
-        // this.setState({activity: getActivitiesForDay(this.props.dayjs)})
+    async componentDidMount() {
+        const querySnap = await getActivities(this.props.day);
+        const activity = querySnap.docs.map(docSnap => docSnap.data());
+        this.setState({activity: activity});
+        this.setState({summary: this.summarize(activity)})
     }
 
     render() {
         return (
             <div className={dayjs().isSame(this.props.day, "day") ? "Day" : "Day-inactive"}>
-                <h2>{this.props.day.format("YYYY-MM-DD")} ({utils.dayOfWeek(this.props.day)})</h2>
+                <h2>{this.props.day.format("YYYY-MM-DD")} ({this.props.day.format("ddd")})</h2>
                 <ActivityItems activity={this.state.activity} />
                 <ActivityForm day={this.props.day} />
                 <ActivityPie data={this.state.summary} />
@@ -55,9 +59,7 @@ class Day extends React.Component {
 }
 
 Day.propTypes = {
-    day: PropTypes.object,
-    activity: PropTypes.array,
-    summary: PropTypes.array
+    day: PropTypes.object
 }
 
 export default Day;

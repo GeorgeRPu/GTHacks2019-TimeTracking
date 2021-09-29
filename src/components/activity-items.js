@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import dayjs, { Dayjs } from 'dayjs';
-import * as utils from 'utils';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+dayjs.extend(duration)
 
 class ActivityItem extends React.Component {
     render () {
+        const start = this.props.start;
+        const end = this.props.end;
         return (
             <div className="ActivityItem">
                 <table>
@@ -16,15 +19,15 @@ class ActivityItem extends React.Component {
                         </tr>
                         <tr>
                             <td className="label">Start:</td>
-                            <td>{utils.timeString(this.props.start)}</td>
+                            <td>{start.format("HH:mm A")}</td>
                         </tr>
                         <tr>
                             <td className="label">End:</td>
-                            <td>{utils.timeString(this.props.end)}</td>
+                            <td>{end.format("HH:mm A")}</td>
                         </tr>
                         <tr>
                             <td className="label">Duration:</td>
-                            <td>{utils.durationString(this.props.start, this.props.end)}</td>
+                            <td>{dayjs.duration(end.diff(start)).format("HH:mm")}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -32,21 +35,22 @@ class ActivityItem extends React.Component {
         );
     }
 }
+
 ActivityItem.propTypes = {
     name: PropTypes.string,
-    start: Dayjs,
-    end: Dayjs,
+    start: PropTypes.object,
+    end: PropTypes.object,
 }
 
 class ActivityItems extends React.Component {
     render() {
         const activityItems = this.props.activity.map(item => {
             return (
-                <li key={utils.timeString(dayjs(item.start))}>
+                <li key={dayjs.unix(item.start.seconds).format("HH:mm A")}>
                     <ActivityItem
                         name={item.name}
-                        start={dayjs(item.start)}
-                        end={dayjs(item.end)}
+                        start={dayjs.unix(item.start.seconds)}
+                        end={dayjs.unix(item.end.seconds)}
                     />
                 </li>
             );

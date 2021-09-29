@@ -1,5 +1,7 @@
 import React from 'react';
-import {addActivity} from 'db/supabase/supabase';
+import PropTypes from 'prop-types';
+
+import {addActivity} from 'db/firebase';
 
 class ActivityForm extends React.Component {
     constructor(props) {
@@ -28,7 +30,7 @@ class ActivityForm extends React.Component {
     }
 
     handleSubmit(event) {
-        addActivity(this.state.name, this.state.start, this.state.end);
+        addActivity(this.props.day, this.state.name, this.state.start, this.state.end);
         event.preventDefault();
     }
 
@@ -55,6 +57,10 @@ class ActivityForm extends React.Component {
             </form>
         );
     }
+}
+
+ActivityForm.propTypes = {
+    day: PropTypes.object
 }
 
 export default ActivityForm;
