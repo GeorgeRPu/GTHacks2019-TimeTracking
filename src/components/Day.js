@@ -5,16 +5,8 @@ import ActivityItems from 'components/activity-items';
 import ActivityPie from 'components/activity-pie';
 
 import dayjs from 'dayjs';
-import { getActivities } from 'db/firebase';
 
 class Day extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activity: [],
-            summary: [],
-        };
-    }
 
     summarize(activity) {
         let summaryMap = new Map();
@@ -39,27 +31,22 @@ class Day extends React.Component {
         return summary;
     }
 
-    async componentDidMount() {
-        const querySnap = await getActivities(this.props.day);
-        const activity = querySnap.docs.map(docSnap => docSnap.data());
-        this.setState({activity: activity});
-        this.setState({summary: this.summarize(activity)})
-    }
-
     render() {
+        const summary = this.summarize(this.props.activity);
         return (
             <div className={dayjs().isSame(this.props.day, "day") ? "Day" : "Day-inactive"}>
                 <h2>{this.props.day.format("YYYY-MM-DD")} ({this.props.day.format("ddd")})</h2>
-                <ActivityItems activity={this.state.activity} />
+                <ActivityItems activity={this.props.activity} />
                 <ActivityForm day={this.props.day} />
-                <ActivityPie data={this.state.summary} />
+                <ActivityPie data={summary} />
             </div>
         )
     }
 }
 
 Day.propTypes = {
-    day: PropTypes.object
+    day: PropTypes.object,
+    activity: PropTypes.array
 }
 
 export default Day;

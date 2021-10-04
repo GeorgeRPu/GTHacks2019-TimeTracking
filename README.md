@@ -16,7 +16,17 @@ graph LR
     Day --> ActivityPie;
 ```
 
-## Database Structure
+## Database Schema
+
+usage (collection) > YYYY-MM-DD (document) > activity (collection) >
+
+```
+{
+    name: String,
+    start (id): Timestamp,
+    end: Timestamp
+}
+```
 
 ## Todo
 
@@ -24,8 +34,9 @@ graph LR
 - [ ] Users cam enter their activity
     - [x] There is a form for users to enter activity
     - [ ] After entering, the new entry is displayed immediately
-- [ ] Users can view their activity data for a *blank* as a pie chart
+- [x] Users can view their activity data for a *blank* as a pie chart
     - [x] Day
-    - [ ] Week
+    - [x] Week
 - [ ] Users can edit entered activity
+- [ ] Users can export data as a CSV
 - [ ] Looks pretty

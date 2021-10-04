@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {addActivity} from 'db/firebase';
+import { addActivityDoc } from 'db/firebase';
 
 class ActivityForm extends React.Component {
     constructor(props) {
@@ -30,31 +30,34 @@ class ActivityForm extends React.Component {
     }
 
     handleSubmit(event) {
-        addActivity(this.props.day, this.state.name, this.state.start, this.state.end);
+        addActivityDoc(this.props.day, this.state.name, this.state.start, this.state.end);
         event.preventDefault();
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td className="label">Name:</td>
-                            <td><input type="text" value={this.state.name} onChange={this.handleNameChange} /></td>
-                        </tr>
-                        <tr>
-                            <td className="label">Start:</td>
-                            <td><input type="text" value={this.state.start} onChange={this.handleStartChange} /></td>
-                        </tr>
-                        <tr>
-                            <td className="label">End:</td>
-                            <td><input type="text" value={this.state.end} onChange={this.handleEndChange} /></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <input type="submit" value="Submit" />
-            </form>
+            <div className="ActivityForm">
+                <form onSubmit={this.handleSubmit}>
+                    <h3>Add new item</h3>
+                    <table className="form-text">
+                        <tbody>
+                            <tr>
+                                <td className="label">Name:</td>
+                                <td><input type="text" value={this.state.name} onChange={this.handleNameChange} /></td>
+                            </tr>
+                            <tr>
+                                <td className="label">Start:</td>
+                                <td><input type="text" value={this.state.start} onChange={this.handleStartChange} /></td>
+                            </tr>
+                            <tr>
+                                <td className="label">End:</td>
+                                <td><input type="text" value={this.state.end} onChange={this.handleEndChange} /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
         );
     }
 }

@@ -11,6 +11,7 @@ class ActivityItem extends React.Component {
         const end = this.props.end;
         return (
             <div className="ActivityItem">
+                <button className="delete-item" onClick={() => {}}>X</button>
                 <table>
                     <tbody>
                         <tr>
@@ -19,11 +20,11 @@ class ActivityItem extends React.Component {
                         </tr>
                         <tr>
                             <td className="label">Start:</td>
-                            <td>{start.format("HH:mm A")}</td>
+                            <td>{start.format("hh:mm A")}</td>
                         </tr>
                         <tr>
                             <td className="label">End:</td>
-                            <td>{end.format("HH:mm A")}</td>
+                            <td>{end.format("hh:mm A")}</td>
                         </tr>
                         <tr>
                             <td className="label">Duration:</td>
@@ -44,7 +45,9 @@ ActivityItem.propTypes = {
 
 class ActivityItems extends React.Component {
     render() {
-        const activityItems = this.props.activity.map(item => {
+        const activity = this.props.activity;
+        activity.sort((a, b) => (a.start > b.start) ? 1 : -1);
+        const activityItems = activity.map(item => {
             return (
                 <li key={dayjs.unix(item.start.seconds).format("HH:mm A")}>
                     <ActivityItem
@@ -57,7 +60,8 @@ class ActivityItems extends React.Component {
         });
         return (
             <div className="ActivityItems">
-                <ul>{activityItems}</ul>
+                <h3>Activity items</h3>
+                <ul className="no-bullets">{activityItems}</ul>
             </div>
         );
     }

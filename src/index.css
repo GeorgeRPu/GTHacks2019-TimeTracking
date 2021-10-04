@@ -16,14 +16,6 @@ h2 {
   text-align: center;
 }
 
-td {
-  min-width: 80px;
-}
-
-ul {
-  display: inline-block;
-}
-
 input[type ="text"] {
   width: 100%;
   padding: 5px;
@@ -35,26 +27,64 @@ input[type ="text"] {
   box-sizing: border-box;
 }
 
+td {
+  min-width: 80px;
+}
+
+ul {
+  display: inline-block;
+}
+
+.ActivityForm {
+  margin: auto;
+  width: 90%;
+}
+
+.ActivityItem {
+  border: 1px solid black;
+}
+
+.ActivityItems {
+  margin: auto;
+  width: 90%;
+}
+
+.ActivityPie {
+  margin: auto;
+  width: 99%;
+}
+
 .label {
   font-weight: bold;
 }
 
-.ActivityItem {
-  border: 1px;
+.delete-item {
+  float: right;
 }
 
 .Day {
   border: 2px solid;
-  width: 14.2%;
+  width: max(14.2%, 300px);
 }
 
 .Day-inactive {
   border: 1px solid;
   color: grey;
-  width: 14.2%;
+  width: max(14.2%, 300px);
 }
 
-.Week {
+table.form-text {
+  width: 100%;
+}
+
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+  width: 100%;
+}
+
+.week-row {
   display: flex;
   flex-direction: row;
 }

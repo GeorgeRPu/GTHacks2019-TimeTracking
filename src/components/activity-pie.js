@@ -8,19 +8,21 @@ class ActivityPie extends React.Component {
     render() {
         const data = this.props.data;
         return (
-            <PieChart width={300} height={300} label>
-                <Pie isAnimationActive={false} data={data} dataKey="value" cx={"50%"} cy={"50%"} outerRadius={100}>
-                    {
-                        data.map((entry, index) => {
-                            return <Cell
-                                key={"cell" + index}
-                                fill={entry.name === "blank" ? "Grey" : colors[index % colors.length]} />;
-                        })
-                    }
-                </Pie>
-                <Tooltip />
-                <Legend />
-            </PieChart>
+            <div className="ActivityPie">
+                <PieChart width={300} height={300} label>
+                    <Pie isAnimationActive={false} data={data} dataKey="value" cx={"50%"} cy={"50%"} outerRadius={100}>
+                        {
+                            data.map((entry, index) => {
+                                return <Cell
+                                    key={"cell" + index}
+                                    fill={entry.name === "blank" ? "Grey" : colors[index % colors.length]} />;
+                            })
+                        }
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                </PieChart>
+            </div>
         )
     }
 }
