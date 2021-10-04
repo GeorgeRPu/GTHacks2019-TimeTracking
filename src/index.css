@@ -35,42 +35,42 @@ ul {
   display: inline-block;
 }
 
-.ActivityForm {
+.activity-form {
   margin: auto;
   width: 90%;
 }
 
-.ActivityItem {
+.activity-item {
   border: 1px solid black;
 }
 
-.ActivityItems {
+.activity-items {
   margin: auto;
   width: 90%;
 }
 
-.ActivityPie {
+.activity-pie {
   margin: auto;
   width: 99%;
-}
-
-.label {
-  font-weight: bold;
 }
 
 .delete-item {
   float: right;
 }
 
-.Day {
+.day {
   border: 2px solid;
   width: max(14.2%, 300px);
 }
 
-.Day-inactive {
+.day-inactive {
   border: 1px solid;
   color: grey;
   width: max(14.2%, 300px);
+}
+
+.label {
+  font-weight: bold;
 }
 
 table.form-text {

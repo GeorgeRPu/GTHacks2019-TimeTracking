@@ -37,6 +37,6 @@ usage (collection) > YYYY-MM-DD (document) > activity (collection) >
 - [x] Users can view their activity data for a *blank* as a pie chart
     - [x] Day
     - [x] Week
-- [ ] Users can edit entered activity
+- [x] Users can delete activity
 - [ ] Users can export data as a CSV
 - [ ] Looks pretty

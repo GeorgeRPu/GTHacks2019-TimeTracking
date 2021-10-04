@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import { deleteActivity } from 'db/firebase';
 dayjs.extend(duration)
 
 class ActivityItem extends React.Component {
+    handleDelete() {
+        const start = this.props.start;
+        deleteActivity(start, start.format("HH-mm-ss"));
+    }
+
     render () {
         const start = this.props.start;
         const end = this.props.end;
         return (
-            <div className="ActivityItem">
-                <button className="delete-item" onClick={() => {}}>X</button>
+            <div className="activity-item">
+                <button className="delete-item" onClick={this.handleDelete}>X</button>
                 <table>
                     <tbody>
                         <tr>
@@ -59,7 +65,7 @@ class ActivityItems extends React.Component {
             );
         });
         return (
-            <div className="ActivityItems">
+            <div className="activity-items">
                 <h3>Activity items</h3>
                 <ul className="no-bullets">{activityItems}</ul>
             </div>

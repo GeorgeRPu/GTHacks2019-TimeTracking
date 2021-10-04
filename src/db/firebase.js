@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { collection, doc, getDocs, getFirestore, setDoc, Timestamp } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, getFirestore, setDoc, Timestamp } from 'firebase/firestore';
 import { firebaseConfig } from 'db/config';
 
 import dayjs from 'dayjs';
@@ -20,8 +20,6 @@ function addActivityDoc(date, name, start, end) {
     const activity = collection(doc(usage, date.format("YYYY-MM-DD")), "activity");
     start = dayjs(date.format("YYYY-MM-DD") + " " + start, timeFormats);
     end = dayjs(date.format("YYYY-MM-DD") + " " + end, timeFormats);
-    console.log(start);
-    console.log(end);
     if (end < start) {
         window.alert("Start time is after end time.");
         return;
@@ -38,4 +36,9 @@ function getActivity(date) {
     return getDocs(activity);
 }
 
-export {addActivityDoc, getActivity}
+function deleteActivity(date, id) {
+    const activity = collection(doc(usage, date.format("YYYY-MM-DD")), "activity");
+    return deleteDoc(doc(activity, id));
+}
+
+export {addActivityDoc, getActivity, deleteActivity};

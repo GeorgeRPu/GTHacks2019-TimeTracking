@@ -34,7 +34,7 @@ class Day extends React.Component {
     render() {
         const summary = this.summarize(this.props.activity);
         return (
-            <div className={dayjs().isSame(this.props.day, "day") ? "Day" : "Day-inactive"}>
+            <div className={dayjs().isSame(this.props.day, "day") ? "day" : "day-inactive"}>
                 <h2>{this.props.day.format("YYYY-MM-DD")} ({this.props.day.format("ddd")})</h2>
                 <ActivityItems activity={this.props.activity} />
                 <ActivityForm day={this.props.day} />

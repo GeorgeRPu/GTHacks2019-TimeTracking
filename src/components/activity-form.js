@@ -36,7 +36,7 @@ class ActivityForm extends React.Component {
 
     render() {
         return (
-            <div className="ActivityForm">
+            <div className="activity-form">
                 <form onSubmit={this.handleSubmit}>
                     <h3>Add new item</h3>
                     <table className="form-text">

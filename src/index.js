@@ -25,7 +25,7 @@ class App extends React.Component {
     }
 
     render() {
-        return <div className="App">
+        return <div className="app">
             <h1>Time Trackr</h1>
             <button className="nav-button" onClick={this.handlePrevClick}>Prev week</button>
             <button className="nav-button" onClick={this.handleNextClick}>Next week</button>

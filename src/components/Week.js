@@ -52,7 +52,7 @@ class Week extends React.Component {
             return <Day key={day.format("ddd")} day={day} activity={this.state.activities[index]} />;
         });
         return (
-            <div className="Week">
+            <div className="week">
                 <div className="week-row">
                     {days}
                 </div>

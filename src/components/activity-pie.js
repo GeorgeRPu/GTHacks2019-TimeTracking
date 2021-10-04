@@ -8,7 +8,7 @@ class ActivityPie extends React.Component {
     render() {
         const data = this.props.data;
         return (
-            <div className="ActivityPie">
+            <div className="activity-pie">
                 <PieChart width={300} height={300} label>
                     <Pie isAnimationActive={false} data={data} dataKey="value" cx={"50%"} cy={"50%"} outerRadius={100}>
                         {
