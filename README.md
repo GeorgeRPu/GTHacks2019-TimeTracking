@@ -38,5 +38,5 @@ usage (collection) > YYYY-MM-DD (document) > activity (collection) >
     - [x] Day
     - [x] Week
 - [x] Users can delete activity
-- [ ] Users can export data as a CSV
+- [x] Users can export data as a CSV
 - [ ] Looks pretty

@@ -12,6 +12,60 @@ class Week extends React.Component {
         this.state = {
             activities: [[], [], [], [], [], [], []]
         }
+        this.exportAsCSV = this.exportAsCSV.bind(this);
+    }
+
+    daysOfWeek() {
+        const sunday = this.props.now.startOf("week");
+        return [0, 1, 2, 3, 4, 5, 6].map(num => sunday.add(num, "days"));
+    }
+
+    processRow(row) {
+        let finalVal = '';
+        for (let j = 0; j < row.length; j++) {
+            let innerValue = row[j] === null ? '' : row[j].toString();
+            if (row[j] instanceof Date) {
+                innerValue = row[j].toLocaleString();
+            }
+            let result = innerValue.replace(/"/g, '""');
+            if (result.search(/("|,|\n)/g) >= 0) {
+                result = '"' + result + '"';
+            }
+            if (j > 0) {
+                finalVal += ',';
+            }
+            finalVal += result;
+        }
+        return finalVal + '\n';
+    }
+
+    exportAsCSV() {
+        let csvFile = "";
+        const days = this.daysOfWeek();
+        for (let i = 0; i < 7; i++) {
+            for (let item of this.state.activities[i]) {
+                csvFile + this.processRow([
+                    days[i].format("YYYY-MM-DD"),
+                    item.start.format("HH:mm:ss"),
+                    item.end.format("HH:mm:ss"),
+                    item.name
+                ]);
+            }
+        }
+
+        const blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            const filename = days[0].format("YYYY-MM-DD") + " to " + days[6].format("YYYY-MM-DD");
+            link.setAttribute("download", filename + ".csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     }
 
     summarize(activity) {
@@ -39,7 +93,7 @@ class Week extends React.Component {
 
     async componentDidMount() {
         const activities = [];
-        for (const day of daysOfWeek(this.props.now)) {
+        for (const day of this.daysOfWeek()) {
             const querySnap = await getActivity(day);
             const activity = querySnap.docs.map(docSnap => docSnap.data());
             activities.push(activity);
@@ -48,7 +102,7 @@ class Week extends React.Component {
     }
 
     render() {
-        const days = daysOfWeek(this.props.now).map((day, index) => {
+        const days = this.daysOfWeek().map((day, index) => {
             return <Day key={day.format("ddd")} day={day} activity={this.state.activities[index]} />;
         });
         return (
@@ -56,16 +110,12 @@ class Week extends React.Component {
                 <div className="week-row">
                     {days}
                 </div>
+                <button onClick={this.exportAsCSV}>Export this week&apos;s data</button>
                 <ActivityPie data={this.summarize(this.state.activities.flat())}/>
             </div>
         )
 
     }
-}
-
-function daysOfWeek(now) {
-    const sunday = now.startOf("week");
-    return [0, 1, 2, 3, 4, 5, 6].map(num => sunday.add(num, "days"));
 }
 
 Week.propTypes = {
