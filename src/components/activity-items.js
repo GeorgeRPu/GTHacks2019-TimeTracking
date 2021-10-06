@@ -7,6 +7,11 @@ import { deleteActivity } from 'db/firebase';
 dayjs.extend(duration)
 
 class ActivityItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
     handleDelete() {
         const start = this.props.start;
         deleteActivity(start, start.format("HH-mm-ss"));

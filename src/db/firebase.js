@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { collection, deleteDoc, doc, getDocs, getFirestore, setDoc, Timestamp } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, query, setDoc, Timestamp } from 'firebase/firestore';
 import { firebaseConfig } from 'db/config';
 
 import dayjs from 'dayjs';
@@ -36,9 +36,14 @@ function getActivity(date) {
     return getDocs(activity);
 }
 
+function listenForActivity(date, callback) {
+    const activity = collection(doc(usage, date.format("YYYY-MM-DD")), "activity");
+    return onSnapshot(query(activity), callback);
+}
+
 function deleteActivity(date, id) {
     const activity = collection(doc(usage, date.format("YYYY-MM-DD")), "activity");
     return deleteDoc(doc(activity, id));
 }
 
-export {addActivityDoc, getActivity, deleteActivity};
+export {addActivityDoc, getActivity, listenForActivity, deleteActivity};

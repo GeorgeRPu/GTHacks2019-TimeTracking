@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Day from 'components/day';
 
 import dayjs from 'dayjs';
-import { getActivity } from 'db/firebase';
+import { listenForActivity } from 'db/firebase';
 import ActivityPie from './activity-pie';
 
 class Week extends React.Component {
@@ -21,7 +21,7 @@ class Week extends React.Component {
     }
 
     processRow(row) {
-        let finalVal = '';
+        let finalVal = "";
         for (let j = 0; j < row.length; j++) {
             let innerValue = row[j] === null ? '' : row[j].toString();
             if (row[j] instanceof Date) {
@@ -56,7 +56,6 @@ class Week extends React.Component {
         const blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement("a");
         if (link.download !== undefined) { // feature detection
-            // Browsers that support HTML5 download attribute
             const url = URL.createObjectURL(blob);
             link.setAttribute("href", url);
             const filename = days[0].format("YYYY-MM-DD") + " to " + days[6].format("YYYY-MM-DD");
@@ -92,13 +91,17 @@ class Week extends React.Component {
     }
 
     async componentDidMount() {
-        const activities = [];
-        for (const day of this.daysOfWeek()) {
-            const querySnap = await getActivity(day);
-            const activity = querySnap.docs.map(docSnap => docSnap.data());
-            activities.push(activity);
+        const activities = [[], [], [], [], [], [], []];
+        const days = this.daysOfWeek();
+        for (let i = 0; i < 7; i++) {
+            listenForActivity(days[i], (querySnap) => {
+                const activity = querySnap.docs.map(docSnap => docSnap.data());
+                console.log(activity);
+                activities[i] = activity;
+                this.setState({activities: activities});
+            });
         }
-        this.setState({activities: activities});
+        console.log("act " + activities);
     }
 
     render() {
