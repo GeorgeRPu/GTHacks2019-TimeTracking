@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, query, setDoc, Timestamp } from 'firebase/firestore';
+import { getAuth, signInAnonymously } from 'firebase/auth';
 import { firebaseConfig } from 'db/config';
 
 import dayjs from 'dayjs';
@@ -7,6 +8,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 
 initializeApp(firebaseConfig);
+signInAnonymously(getAuth()).then(() => console.log("Signed In"));
 const db = getFirestore();
 const usage = collection(db, "usage");
 

@@ -38,7 +38,7 @@ class Day extends React.Component {
                 <h2>{this.props.day.format("YYYY-MM-DD")} ({this.props.day.format("ddd")})</h2>
                 <ActivityItems activity={this.props.activity} />
                 <ActivityForm day={this.props.day} />
-                <ActivityPie data={summary} />
+                <ActivityPie data={summary} size={300} />
             </div>
         )
     }

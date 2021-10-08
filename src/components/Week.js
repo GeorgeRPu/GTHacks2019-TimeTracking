@@ -96,12 +96,10 @@ class Week extends React.Component {
         for (let i = 0; i < 7; i++) {
             listenForActivity(days[i], (querySnap) => {
                 const activity = querySnap.docs.map(docSnap => docSnap.data());
-                console.log(activity);
                 activities[i] = activity;
                 this.setState({activities: activities});
             });
         }
-        console.log("act " + activities);
     }
 
     render() {
@@ -114,7 +112,7 @@ class Week extends React.Component {
                     {days}
                 </div>
                 <button onClick={this.exportAsCSV}>Export this week&apos;s data</button>
-                <ActivityPie data={this.summarize(this.state.activities.flat())}/>
+                <ActivityPie data={this.summarize(this.state.activities.flat())} size={500}/>
             </div>
         )
 

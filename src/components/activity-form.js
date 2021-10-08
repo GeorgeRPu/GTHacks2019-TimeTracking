@@ -31,6 +31,11 @@ class ActivityForm extends React.Component {
 
     handleSubmit(event) {
         addActivityDoc(this.props.day, this.state.name, this.state.start, this.state.end);
+        this.setState({
+            name: "",
+            start: "",
+            end: ""
+        });
         event.preventDefault();
     }
 
