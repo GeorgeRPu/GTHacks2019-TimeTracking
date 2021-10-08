@@ -1,10 +1,13 @@
 {
   "name": "timetrackr",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.17.0"
+  },
   "private": true,
   "dependencies": {
     "dayjs": "^1.10.7",
-    "firebase": "^9.1.0",
+    "firebase": "^9.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
@@ -32,6 +35,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react": "^7.26.0"
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.1"
   }
 }

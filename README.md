@@ -18,12 +18,12 @@ graph LR
 
 ## Database Schema
 
-usage (collection) > YYYY-MM-DD (document) > activity (collection) >
+usage (collection) > YYYY-MM-DD (document) > activity (collection) > HH-mm-ss
 
 ```
 {
     name: String,
-    start (id): Timestamp,
+    start: Timestamp,
     end: Timestamp
 }
 ```
