@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ActivityForm from 'components/activity-form';
 import ActivityItems from 'components/activity-items';
-import ActivityPie from 'components/activity-pie';
+import { ActivityPie } from 'components/activity-charts';
 
 import dayjs from 'dayjs';
 
@@ -32,12 +32,14 @@ class Day extends React.Component {
     }
 
     render() {
-        const summary = this.summarize(this.props.activity);
+        const { day, activity } = this.props;
+        const summary = this.summarize(activity);
+        summary.sort((a, b) => a.value < b.value ? 1 : -1);
         return (
-            <div className={dayjs().isSame(this.props.day, "day") ? "day" : "day-inactive"}>
-                <h2>{this.props.day.format("YYYY-MM-DD")} ({this.props.day.format("ddd")})</h2>
-                <ActivityItems activity={this.props.activity} />
-                <ActivityForm day={this.props.day} />
+            <div className={dayjs().isSame(day, "day") ? "day" : "day-inactive"}>
+                <h2>{day.format("YYYY-MM-DD")} ({day.format("ddd")})</h2>
+                <ActivityItems activity={activity} />
+                <ActivityForm day={day} />
                 <ActivityPie data={summary} size={300} />
             </div>
         )

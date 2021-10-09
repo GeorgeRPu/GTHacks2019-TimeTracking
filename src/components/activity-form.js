@@ -40,6 +40,7 @@ class ActivityForm extends React.Component {
     }
 
     render() {
+        const { name, start, end } = this.state;
         return (
             <div className="activity-form">
                 <form onSubmit={this.handleSubmit}>
@@ -48,15 +49,15 @@ class ActivityForm extends React.Component {
                         <tbody>
                             <tr>
                                 <td className="label">Name:</td>
-                                <td><input type="text" value={this.state.name} onChange={this.handleNameChange} /></td>
+                                <td><input type="text" value={name} onChange={this.handleNameChange} /></td>
                             </tr>
                             <tr>
                                 <td className="label">Start:</td>
-                                <td><input type="text" value={this.state.start} onChange={this.handleStartChange} /></td>
+                                <td><input type="text" value={start} onChange={this.handleStartChange} /></td>
                             </tr>
                             <tr>
                                 <td className="label">End:</td>
-                                <td><input type="text" value={this.state.end} onChange={this.handleEndChange} /></td>
+                                <td><input type="text" value={end} onChange={this.handleEndChange} /></td>
                             </tr>
                         </tbody>
                     </table>

@@ -21,7 +21,12 @@ const timeFormats = [
 function addActivityDoc(date, name, start, end) {
     const activity = collection(doc(usage, date.format("YYYY-MM-DD")), "activity");
     start = dayjs(date.format("YYYY-MM-DD") + " " + start, timeFormats);
-    end = dayjs(date.format("YYYY-MM-DD") + " " + end, timeFormats);
+    if (end.toUpperCase().includes("EOD")) {
+        end = date.add(1, "day").startOf("day");
+    } else {
+        end = dayjs(date.format("YYYY-MM-DD") + " " + end, timeFormats);
+    }
+
     if (end < start) {
         window.alert("Start time is after end time.");
         return;

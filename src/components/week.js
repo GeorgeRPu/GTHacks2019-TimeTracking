@@ -4,7 +4,7 @@ import Day from 'components/day';
 
 import dayjs from 'dayjs';
 import { listenForActivity } from 'db/firebase';
-import ActivityPie from './activity-pie';
+import { ActivityPie, ActivityBar } from './activity-charts';
 
 class Week extends React.Component {
     constructor(props) {
@@ -106,13 +106,18 @@ class Week extends React.Component {
         const days = this.daysOfWeek().map((day, index) => {
             return <Day key={day.format("ddd")} day={day} activity={this.state.activities[index]} />;
         });
+        const summary = this.summarize(this.state.activities.flat());
+        summary.sort((a, b) => a.value < b.value ? 1 : -1);
         return (
             <div className="week">
                 <div className="week-row">
                     {days}
                 </div>
                 <button onClick={this.exportAsCSV}>Export this week&apos;s data</button>
-                <ActivityPie data={this.summarize(this.state.activities.flat())} size={500}/>
+                <div className="week-row">
+                    <ActivityPie data={summary} size={500} />
+                    <ActivityBar data={summary} size={500} />
+                </div>
             </div>
         )
 

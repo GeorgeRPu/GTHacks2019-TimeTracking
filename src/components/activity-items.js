@@ -18,8 +18,7 @@ class ActivityItem extends React.Component {
     }
 
     render () {
-        const start = this.props.start;
-        const end = this.props.end;
+        const { name, start, end } = this.props;
         return (
             <div className="activity-item">
                 <button className="delete-item" onClick={this.handleDelete}>X</button>
@@ -27,7 +26,7 @@ class ActivityItem extends React.Component {
                     <tbody>
                         <tr>
                             <td className="label">Name:</td>
-                            <td>{this.props.name}</td>
+                            <td>{name}</td>
                         </tr>
                         <tr>
                             <td className="label">Start:</td>
@@ -79,7 +78,6 @@ class ActivityItems extends React.Component {
 }
 
 ActivityItems.propTypes = {
-    name: PropTypes.string,
     activity: PropTypes.array,
 }
 
