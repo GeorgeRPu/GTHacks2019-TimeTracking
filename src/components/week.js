@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Day from 'components/day';
+import { ActivityPie, ActivityBar } from './activity-charts';
 
 import dayjs from 'dayjs';
 import { listenForActivity } from 'db/firebase';
-import { ActivityPie, ActivityBar } from './activity-charts';
 
 class Week extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activities: [[], [], [], [], [], [], []]
+            activities: [[], [], [], [], [], [], []],
+            unsubs: [() => {}, () => {}, () => {}, () => {}, () => {}, () => {}, () => {}]
         }
         this.exportAsCSV = this.exportAsCSV.bind(this);
     }
@@ -41,17 +42,16 @@ class Week extends React.Component {
 
     exportAsCSV() {
         let csvFile = "";
-        const days = this.daysOfWeek();
-        for (let i = 0; i < 7; i++) {
-            for (let item of this.state.activities[i]) {
+        const days = this.daysOfWeek().forEach((day, index) => {
+            for (let item of this.state.activities[index]) {
                 csvFile + this.processRow([
-                    days[i].format("YYYY-MM-DD"),
+                    day.format("YYYY-MM-DD"),
                     item.start.format("HH:mm:ss"),
                     item.end.format("HH:mm:ss"),
                     item.name
                 ]);
             }
-        }
+        });
 
         const blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement("a");
@@ -90,16 +90,28 @@ class Week extends React.Component {
         return summary;
     }
 
-    async componentDidMount() {
-        const activities = [[], [], [], [], [], [], []];
-        const days = this.daysOfWeek();
-        for (let i = 0; i < 7; i++) {
-            listenForActivity(days[i], (querySnap) => {
+    componentDidMount() {
+        for (const unsub of this.state.unsubs) {
+            unsub();
+        }
+        const unsubs = [];
+        this.daysOfWeek().forEach((day, index) => {
+            const unsub = listenForActivity(day, (querySnap) => {
                 const activity = querySnap.docs.map(docSnap => docSnap.data());
-                activities[i] = activity;
+                const activities = [...this.state.activities];
+                activities[index] = activity;
                 this.setState({activities: activities});
             });
+            unsubs.push(unsub);
+        });
+        this.setState({unsubs: unsubs});
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.now.isSame(prevProps.now, 'week')) {
+            return;
         }
+        this.componentDidMount();
     }
 
     render() {

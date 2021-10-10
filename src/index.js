@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'index.css';
 import * as serviceWorker from 'serviceWorker';
-
 import Week from 'components/week';
+
 import dayjs from 'dayjs';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            now: dayjs(),
+            now: dayjs()
         }
         this.handleNextClick = this.handleNextClick.bind(this);
         this.handlePrevClick = this.handlePrevClick.bind(this);
