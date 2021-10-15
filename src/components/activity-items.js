@@ -21,7 +21,7 @@ class ActivityItem extends React.Component {
         const { name, start, end } = this.props;
         return (
             <div className="bg-gray-200 border-2 rounded-lg m-1">
-                <button className="bg-red-700 text-white m-1 py-0 px-2 rounded float-right" onClick={this.handleDelete}>X</button>
+                <button className="hover:bg-red-700 hover:text-white m-1 py-0 px-1 rounded float-right " onClick={this.handleDelete}>✕</button>
                 <div className="grid grid-cols-5">
                     <div className="col-span-2 font-bold ml-1">Name:</div>
                     <div className="col-span-3 font-bold">{name}</div>

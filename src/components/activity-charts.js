@@ -8,7 +8,7 @@ class ActivityPie extends React.Component {
     render() {
         const { data, width, height } = this.props;
         return (
-            <div className="w-full h-auto">
+            <div>
                 <PieChart width={width} height={height} label>
                     <Pie isAnimationActive={false} data={data} dataKey="value" cx={"50%"} cy={"50%"} outerRadius={width / 3} paddingAngle={1}>
                         {
@@ -31,7 +31,7 @@ class ActivityBar extends React.Component {
     render() {
         const { data, size } = this.props;
         return (
-            <div className="">
+            <div>
                 <BarChart width={size * 2} height={size} data={data}>
                     <XAxis dataKey="name" />
                     <YAxis />

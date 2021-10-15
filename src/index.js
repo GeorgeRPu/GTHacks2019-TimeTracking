@@ -27,8 +27,8 @@ class App extends React.Component {
     render() {
         return <div className="">
             <h1 className="text-center text-black text-3xl font-bold">Time Trackr</h1>
-            <button className="rounded bg-blue-600 text-white m-1 p-1" onClick={this.handlePrevClick}>Prev week</button>
-            <button className="rounded bg-blue-600 text-white p-1" onClick={this.handleNextClick}>Next week</button>
+            <button className="rounded bg-blue-600 hover:bg-blue-700 text-white m-1 p-1" onClick={this.handlePrevClick}>Prev week</button>
+            <button className="rounded bg-blue-600 hover:bg-blue-700 text-white p-1" onClick={this.handleNextClick}>Next week</button>
             <Week now={this.state.now} />
         </div>
     }

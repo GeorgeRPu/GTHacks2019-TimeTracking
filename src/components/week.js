@@ -125,7 +125,7 @@ class Week extends React.Component {
                 <div className="flex flex-row">
                     {days}
                 </div>
-                <button className="rounded bg-green-600 text-white m-1 p-1" onClick={this.exportAsCSV}>Export this week&apos;s data</button>
+                <button className="rounded bg-green-600 hover:bg-green-700 text-white m-1 p-1" onClick={this.exportAsCSV}>Export this week&apos;s data</button>
                 <div className="flex flex-row">
                     <ActivityPie data={summary} width={500} height={500} />
                     <ActivityBar data={summary} size={500} />

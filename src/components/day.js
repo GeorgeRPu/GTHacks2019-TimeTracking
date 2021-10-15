@@ -36,7 +36,7 @@ class Day extends React.Component {
         const summary = this.summarize(activity);
         summary.sort((a, b) => a.value < b.value ? 1 : -1);
         return (
-            <div className={dayjs().isSame(day, "day") ? "border-2 border-black text-black" : "border text-gray-600 border-gray-600"}>
+            <div className={dayjs().isSame(day, "day") ? "border-2 border-black text-black" : "border text-gray-400 border-gray-400"}>
                 <h2 className="text-xl text-center font-semibold">{day.format("YYYY-MM-DD")} ({day.format("ddd")})</h2>
                 <ActivityItems activity={activity} />
                 <ActivityForm day={day} />

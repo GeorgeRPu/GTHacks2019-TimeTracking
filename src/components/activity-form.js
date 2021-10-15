@@ -44,19 +44,19 @@ class ActivityForm extends React.Component {
         return (
             <div className="mb-1">
                 <h3 className="text-lg ml-2 font-semibold">Add new item</h3>
-                <div className="rounded-lg border-2 border-gray-400 m-1 flex">
+                <div className="rounded-lg border-2 border-gray-500 m-1 flex">
                     <form onSubmit={this.handleSubmit}>
                         <div className="grid grid-cols-3">
                             <div className="font-bold ml-1">Name:</div>
-                            <input className="col-span-2 border-2 border-gray-400 rounded px-1" type="text" value={name} onChange={this.handleNameChange} />
+                            <input className="col-span-2 border-2 border-gray-500 rounded px-1" type="text" value={name} onChange={this.handleNameChange} />
 
                             <div className="font-bold ml-1">Start:</div>
-                            <input className="col-span-2 border-2 border-gray-400 rounded px-1" type="text" value={start} onChange={this.handleStartChange} />
+                            <input className="col-span-2 border-2 border-gray-500 rounded px-1" type="text" value={start} onChange={this.handleStartChange} />
 
                             <div className="font-bold ml-1">End:</div>
-                            <input className="col-span-2 border-2 border-gray-400 rounded px-1" type="text" value={end} onChange={this.handleEndChange} />
+                            <input className="col-span-2 border-2 border-gray-500 rounded px-1" type="text" value={end} onChange={this.handleEndChange} />
                         </div>
-                        <input className="rounded bg-blue-600 text-white m-1 p-1 float-right" type="submit" value="Submit" />
+                        <input className="rounded bg-blue-600 hover:bg-blue-700 text-white m-1 p-1 float-right" type="submit" value="Submit" />
                     </form>
                 </div>
             </div>

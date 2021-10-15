@@ -57,4 +57,6 @@ usage (collection) > YYYY-MM-DD (document) > activity (collection) > HH-mm-ss
     - [x] Week
 - [x] Users can delete activity
 - [x] Users can export data as a CSV
-- [ ] Looks pretty
+- [x] Looks pretty
+- [ ] "Average" day breakdown
+- [ ] User login
