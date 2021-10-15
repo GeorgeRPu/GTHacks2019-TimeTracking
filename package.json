@@ -1,11 +1,12 @@
 {
   "name": "timetrackr",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "node": "14.17.0"
   },
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.3.0",
     "dayjs": "^1.10.7",
     "firebase": "^9.1.2",
     "react": "^17.0.2",
@@ -14,9 +15,9 @@
     "recharts": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -35,7 +36,10 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^9.8.8",
     "eslint": "^7.32.0",
-    "eslint-plugin-react": "^7.26.1"
+    "eslint-plugin-react": "^7.26.1",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }

@@ -6,11 +6,11 @@ const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"
 
 class ActivityPie extends React.Component {
     render() {
-        const { data, size } = this.props;
+        const { data, width, height } = this.props;
         return (
-            <div className="activity-pie">
-                <PieChart width={size} height={size} label>
-                    <Pie isAnimationActive={false} data={data} dataKey="value" cx={"50%"} cy={"50%"} outerRadius={size / 3} paddingAngle={1}>
+            <div className="w-full h-auto">
+                <PieChart width={width} height={height} label>
+                    <Pie isAnimationActive={false} data={data} dataKey="value" cx={"50%"} cy={"50%"} outerRadius={width / 3} paddingAngle={1}>
                         {
                             data.map((entry, index) => {
                                 return <Cell
@@ -31,12 +31,11 @@ class ActivityBar extends React.Component {
     render() {
         const { data, size } = this.props;
         return (
-            <div className="activity-bar">
+            <div className="">
                 <BarChart width={size * 2} height={size} data={data}>
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Legend />
                     <Bar dataKey="value" fill={colors[0]} label={{ position: 'top' }}>
                         {
                             data.map((entry, index) => {
@@ -54,7 +53,8 @@ class ActivityBar extends React.Component {
 
 ActivityPie.propTypes = {
     data: PropTypes.array,
-    size: PropTypes.number
+    width: PropTypes.number,
+    height: PropTypes.number
 }
 
 ActivityBar.propTypes = {

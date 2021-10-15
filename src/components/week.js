@@ -121,13 +121,13 @@ class Week extends React.Component {
         const summary = this.summarize(this.state.activities.flat());
         summary.sort((a, b) => a.value < b.value ? 1 : -1);
         return (
-            <div className="week">
-                <div className="week-row">
+            <div className="">
+                <div className="flex flex-row">
                     {days}
                 </div>
-                <button onClick={this.exportAsCSV}>Export this week&apos;s data</button>
-                <div className="week-row">
-                    <ActivityPie data={summary} size={500} />
+                <button className="rounded bg-green-600 text-white m-1 p-1" onClick={this.exportAsCSV}>Export this week&apos;s data</button>
+                <div className="flex flex-row">
+                    <ActivityPie data={summary} width={500} height={500} />
                     <ActivityBar data={summary} size={500} />
                 </div>
             </div>

@@ -20,28 +20,21 @@ class ActivityItem extends React.Component {
     render () {
         const { name, start, end } = this.props;
         return (
-            <div className="activity-item">
-                <button className="delete-item" onClick={this.handleDelete}>X</button>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td className="label">Name:</td>
-                            <td>{name}</td>
-                        </tr>
-                        <tr>
-                            <td className="label">Start:</td>
-                            <td>{start.format("hh:mm A")}</td>
-                        </tr>
-                        <tr>
-                            <td className="label">End:</td>
-                            <td>{end.format("hh:mm A")}</td>
-                        </tr>
-                        <tr>
-                            <td className="label">Duration:</td>
-                            <td>{dayjs.duration(end.diff(start)).format("HH:mm")}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div className="bg-gray-200 border-2 rounded-lg m-1">
+                <button className="bg-red-700 text-white m-1 py-0 px-2 rounded float-right" onClick={this.handleDelete}>X</button>
+                <div className="grid grid-cols-5">
+                    <div className="col-span-2 font-bold ml-1">Name:</div>
+                    <div className="col-span-3 font-bold">{name}</div>
+
+                    <div className="col-span-2 font-bold ml-1">Start:</div>
+                    <div className="col-span-3">{start.format("hh:mm A")}</div>
+
+                    <div className="col-span-2 font-bold ml-1">End:</div>
+                    <div className="col-span-3 ">{end.format("hh:mm A")}</div>
+
+                    <div className="col-span-2 font-bold ml-1">Duration:</div>
+                    <div className="col-span-3">{dayjs.duration(end.diff(start)).format("HH:mm")}</div>
+                </div>
             </div>
         );
     }
@@ -69,9 +62,9 @@ class ActivityItems extends React.Component {
             );
         });
         return (
-            <div className="activity-items">
-                <h3>Activity items</h3>
-                <ul className="no-bullets">{activityItems}</ul>
+            <div className="">
+                <h3 className="text-lg ml-2 font-semibold">Activity items</h3>
+                <ul>{activityItems}</ul>
             </div>
         );
     }
