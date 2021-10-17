@@ -69,7 +69,7 @@ class AverageDay extends React.Component {
         return (
             <div>
                 <PieChart width={size} height={size}>
-                    <Pie isAnimationActive={false} data={data} dataKey="value" innerRadius={size / 9} outerRadius={size / 3} startAngle={90} endAngle={90 + 360}>
+                    <Pie isAnimationActive={false} data={data} dataKey="value" innerRadius={size / 9} outerRadius={size / 3} startAngle={90} endAngle={60 - 360}>
                         {
                             data.map((entry, index) => {
                                 return <Cell
