@@ -43,8 +43,8 @@ class ActivityForm extends React.Component {
         const { name, start, end } = this.state;
         return (
             <div className="mb-1">
-                <h3 className="text-lg ml-2 font-semibold">Add new item</h3>
-                <div className="rounded-lg border-2 border-gray-500 m-1 flex">
+                <h3 className="text-lg ml-3 font-semibold">Add new item</h3>
+                <div className="rounded-lg border-2 border-gray-500 m-2 flex">
                     <form onSubmit={this.handleSubmit}>
                         <div className="grid grid-cols-3">
                             <div className="font-bold ml-1">Name:</div>

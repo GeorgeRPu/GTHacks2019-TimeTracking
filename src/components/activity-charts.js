@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Bar, BarChart, Cell, Legend, Pie, PieChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, Cell, LabelList, Legend, Pie, PieChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#bcbd22", "#17becf"];
 
@@ -36,7 +36,7 @@ class ActivityBar extends React.Component {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="value" fill={colors[0]} label={{ position: 'top' }}>
+                    <Bar dataKey="value" label={{ position: 'top' }}>
                         {
                             data.map((entry, index) => {
                                 return <Cell
@@ -46,6 +46,41 @@ class ActivityBar extends React.Component {
                         }
                     </Bar>
                 </BarChart>
+            </div>
+        )
+    }
+}
+
+class AverageDay extends React.Component {
+    getColor(name) {
+        return colors[this.props.cmap.get(name) % colors.length];
+    }
+
+    render() {
+        const { data, cmap, size } = this.props;
+        let payload = [... new Set(data.map(item => item.name))];
+        payload = payload.map(item => {
+            return {
+                value: item,
+                type: "square",
+                color: item === "blank" ? "grey" : colors[cmap.get(item) % colors.length]
+            }
+        });
+        return (
+            <div>
+                <PieChart width={size} height={size}>
+                    <Pie isAnimationActive={false} data={data} dataKey="value" innerRadius={size / 9} outerRadius={size / 3} startAngle={90} endAngle={90 + 360}>
+                        {
+                            data.map((entry, index) => {
+                                return <Cell
+                                    key={"cell" + index}
+                                    fill={entry.name === "blank" ? "grey" : colors[cmap.get(entry.name) % colors.length]} />
+                            })
+                        }
+                        <LabelList dataKey="hour" />
+                    </Pie>
+                    <Legend payload={payload} iconType="square" />
+                </PieChart>
             </div>
         )
     }
@@ -62,4 +97,10 @@ ActivityBar.propTypes = {
     size: PropTypes.number
 }
 
-export { ActivityPie , ActivityBar };
+AverageDay.propTypes = {
+    data: PropTypes.array,
+    cmap: PropTypes.object,
+    size: PropTypes.number
+}
+
+export { ActivityPie , ActivityBar, AverageDay };

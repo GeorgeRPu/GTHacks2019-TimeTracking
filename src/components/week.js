@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Day from 'components/day';
-import { ActivityPie, ActivityBar } from './activity-charts';
+import { ActivityPie, ActivityBar, AverageDay } from './activity-charts';
 
 import dayjs from 'dayjs';
 import { listenForActivity } from 'db/firebase';
@@ -67,8 +67,8 @@ class Week extends React.Component {
         }
     }
 
-    summarize(activity) {
-        let summaryMap = new Map();
+    summarizeWeek(activity) {
+        const summaryMap = new Map();
         let blank = dayjs.duration(24 * 7, "hours");
         for (const item of activity) {
             const name = item.name.toLowerCase();
@@ -82,12 +82,48 @@ class Week extends React.Component {
             blank = blank.subtract(duration);
             summaryMap.set(name, prev.add(duration));
         }
-        let summary = [];
+        const summary = [];
         for (const [name, duration] of summaryMap) {
             summary.push({"name": name, "value": parseFloat(duration.asHours().toFixed(2))});
         }
         summary.push({"name": "blank", "value": parseFloat(blank.asHours().toFixed(2))})
         return summary;
+    }
+
+    hourInDay(date) {
+        return date.hour();
+    }
+
+    averageDay(activity) {
+        const average = [];
+        for (let h = 0; h < 24; h++) {
+            const hourMap = new Map();
+            for (const item of activity) {
+                const name = item.name.toLowerCase();
+                const startHour = this.hourInDay(dayjs.unix(item.start.seconds));
+                const endHour = this.hourInDay(dayjs.unix(item.end.seconds));
+                if (startHour <= h && h <= endHour) {
+                    hourMap.set(name, hourMap.has(name) ? hourMap.get(name) + 1 : 1);
+                }
+            }
+            if (hourMap.size == 0) {
+                average.push({"hour": h + 1, "name": "blank", "value": 1})
+            } else {
+                // https://stackoverflow.com/questions/51690146/javascript-finding-highest-value-in-map-vs-object
+                const mode = [...hourMap.entries()].reduce((a, b) => b[1] > a[1] ? b : a)[0];
+                average.push({"hour": h + 1, "name": mode, "value": 1});
+            }
+        }
+        let color = 0;
+        const cmap = new Map();
+        for (const activity of average) {
+            const name = activity.name;
+            if (!cmap.has(name)) {
+                cmap.set(name, color);
+                color++;
+            }
+        }
+        return [average, cmap];
     }
 
     componentDidMount() {
@@ -118,8 +154,9 @@ class Week extends React.Component {
         const days = this.daysOfWeek().map((day, index) => {
             return <Day key={day.format("ddd")} day={day} activity={this.state.activities[index]} />;
         });
-        const summary = this.summarize(this.state.activities.flat());
+        const summary = this.summarizeWeek(this.state.activities.flat());
         summary.sort((a, b) => a.value < b.value ? 1 : -1);
+        const [average, cmap] = this.averageDay(this.state.activities.flat());
         return (
             <div className="">
                 <div className="flex flex-row">
@@ -130,6 +167,7 @@ class Week extends React.Component {
                     <ActivityPie data={summary} width={500} height={500} />
                     <ActivityBar data={summary} size={500} />
                 </div>
+                <AverageDay data={average} cmap={cmap} size={500} />
             </div>
         )
 

@@ -20,7 +20,7 @@ class ActivityItem extends React.Component {
     render () {
         const { name, start, end } = this.props;
         return (
-            <div className="bg-gray-200 border-2 rounded-lg m-1">
+            <div className="bg-gray-200 border-2 rounded-lg m-2">
                 <button className="hover:bg-red-700 hover:text-white m-1 py-0 px-1 rounded float-right " onClick={this.handleDelete}>✕</button>
                 <div className="grid grid-cols-5">
                     <div className="col-span-2 font-bold ml-1">Name:</div>
@@ -63,7 +63,7 @@ class ActivityItems extends React.Component {
         });
         return (
             <div className="">
-                <h3 className="text-lg ml-2 font-semibold">Activity items</h3>
+                <h3 className="text-lg ml-3 font-semibold">Activity items</h3>
                 <ul>{activityItems}</ul>
             </div>
         );
