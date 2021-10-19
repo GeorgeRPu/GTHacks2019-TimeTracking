@@ -90,19 +90,16 @@ class Week extends React.Component {
         return summary;
     }
 
-    hourInDay(date) {
-        return date.hour();
-    }
-
     averageDay(activity) {
         const average = [];
         for (let h = 0; h < 24; h++) {
             const hourMap = new Map();
             for (const item of activity) {
                 const name = item.name.toLowerCase();
-                const startHour = this.hourInDay(dayjs.unix(item.start.seconds));
-                const endHour = this.hourInDay(dayjs.unix(item.end.seconds));
-                if (startHour <= h && h <= endHour) {
+                const start = dayjs.unix(item.start.seconds);
+                const end = dayjs.unix(item.end.seconds);
+                const endIsEOD = end.hour() == 0 && end.minute() == 0 && end.second() == 0;
+                if (start.hour() <= h && (h <= end.hour() || endIsEOD)) {
                     hourMap.set(name, hourMap.has(name) ? hourMap.get(name) + 1 : 1);
                 }
             }
