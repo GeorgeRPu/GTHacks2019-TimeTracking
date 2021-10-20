@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, query, setDoc, Timestamp } from 'firebase/firestore';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { firebaseConfig } from 'db/config';
 
@@ -7,7 +8,11 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider("6LfNkuAcAAAAAEFH_R2IafuvPtCbamytv2mFMAGL"),
+    isTokenAutoRefreshEnabled: true
+});
 signInAnonymously(getAuth()).then(() => console.log("Signed In"));
 const db = getFirestore();
 const usage = collection(db, "usage");
