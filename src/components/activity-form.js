@@ -18,7 +18,7 @@ class ActivityForm extends React.Component {
     }
 
     handleNameChange(event) {
-        this.setState({name: event.target.value.toLowerCase()});
+        this.setState({name: event.target.value});
     }
 
     handleStartChange(event) {

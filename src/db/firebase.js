@@ -37,7 +37,7 @@ function addActivityDoc(date, name, start, end) {
         return;
     }
     return setDoc(doc(activity, start.format("HH-mm-ss")), {
-        name: name,
+        name: name.toLowerCase().trim(),
         start: Timestamp.fromMillis(start.valueOf()),
         end: Timestamp.fromMillis(end.valueOf()),
     });
