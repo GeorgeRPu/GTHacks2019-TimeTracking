@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, query, setDoc, Timestamp } from 'firebase/firestore';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
-import { getAuth, signInAnonymously } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseConfig } from 'db/config';
 
 import dayjs from 'dayjs';
@@ -13,7 +13,9 @@ initializeAppCheck(app, {
     provider: new ReCaptchaV3Provider("6LfNkuAcAAAAAEFH_R2IafuvPtCbamytv2mFMAGL"),
     isTokenAutoRefreshEnabled: true
 });
-signInAnonymously(getAuth()).then(() => console.log("Signed In"));
+signInWithEmailAndPassword(getAuth(), process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD)
+    .then((userCredential) => console.log("Signed in as " + userCredential.user.email))
+    .catch((error) => console.log(error.message));
 const db = getFirestore();
 const usage = collection(db, "usage");
 

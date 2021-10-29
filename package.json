@@ -1,6 +1,6 @@
 {
   "name": "timetrackr",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "engines": {
     "node": "14.17.0"
   },
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.8",
+    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.26.1",
     "postcss": "^7.0.39",

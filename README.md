@@ -59,4 +59,5 @@ usage (collection) > YYYY-MM-DD (document) > activity (collection) > HH-mm-ss
 - [x] Users can export data as a CSV
 - [x] Looks pretty
 - [x] "Average" day breakdown
-- [ ] User login
+- [x] User login (via environment variables)
+- [ ] Can set time goals for week
