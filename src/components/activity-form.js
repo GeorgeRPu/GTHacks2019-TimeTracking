@@ -47,13 +47,13 @@ class ActivityForm extends React.Component {
                 <div className="rounded-lg border-2 border-gray-500 m-2 flex shadow">
                     <form onSubmit={this.handleSubmit}>
                         <div className="grid grid-cols-3">
-                            <div className="font-bold ml-1 mt-1">Name:</div>
+                            <label className="font-bold ml-1 mt-1">Name:</label>
                             <input className="col-span-2 border-2 border-gray-500 rounded m-1 px-1" type="text" value={name} onChange={this.handleNameChange} />
 
-                            <div className="font-bold ml-1">Start:</div>
+                            <label className="font-bold ml-1">Start:</label>
                             <input className="col-span-2 border-2 border-gray-500 rounded mb-1 ml-1 mr-1 px-1" type="text" value={start} onChange={this.handleStartChange} />
 
-                            <div className="font-bold ml-1">End:</div>
+                            <label className="font-bold ml-1">End:</label>
                             <input className="col-span-2 border-2 border-gray-500 rounded ml-1 mr-1 px-1" type="text" value={end} onChange={this.handleEndChange} />
                         </div>
                         <input className="rounded bg-blue-600 hover:bg-blue-700 text-white m-1 p-1 float-right shadow" type="submit" value="Submit" />

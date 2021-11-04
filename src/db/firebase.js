@@ -18,6 +18,7 @@ signInWithEmailAndPassword(getAuth(), process.env.REACT_APP_USERNAME, process.en
     .catch((error) => console.log(error.message));
 const db = getFirestore();
 const usage = collection(db, "usage");
+const notes = collection(db, "notes");
 
 const timeFormats = [
     "h:mm a", "h:mm A", "h:mm:ss a", "h:mm:ss A",
@@ -45,11 +46,6 @@ function addActivityDoc(date, name, start, end) {
     });
 }
 
-function getActivity(date) {
-    const activity = collection(doc(usage, date.format("YYYY-MM-DD")), "activity");
-    return getDocs(activity);
-}
-
 function listenForActivity(date, callback) {
     const activity = collection(doc(usage, date.format("YYYY-MM-DD")), "activity");
     return onSnapshot(query(activity), callback);
@@ -60,4 +56,17 @@ function deleteActivity(date, id) {
     return deleteDoc(doc(activity, id));
 }
 
-export {addActivityDoc, getActivity, listenForActivity, deleteActivity};
+function getGoals(week) {
+    const goals = collection(doc(notes, week.format("YYYY-MM-DD")), "goals")
+    return getDocs(goals);
+}
+
+function setGoal(week, priority, goal, reached) {
+    const goals = collection(doc(notes, week.format("YYYY-MM-DD")), "goals");
+    return setDoc(doc(goals, priority), {
+        goal: goal,
+        reached: reached
+    });
+}
+
+export {addActivityDoc, getGoals, deleteActivity, listenForActivity, setGoal};

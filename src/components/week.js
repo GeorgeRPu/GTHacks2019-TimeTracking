@@ -5,6 +5,7 @@ import { ActivityPie, ActivityBar, AverageDay } from './activity-charts';
 
 import dayjs from 'dayjs';
 import { listenForActivity } from 'db/firebase';
+import { CurrentWeekGoals, NextWeekGoals } from './goals';
 
 class Week extends React.Component {
     constructor(props) {
@@ -156,6 +157,10 @@ class Week extends React.Component {
         const [average, cmap] = this.averageDay(this.state.activities.flat());
         return (
             <div className="">
+                <div className="flex flex-row">
+                    <CurrentWeekGoals week={this.props.now.startOf('week')} />
+                    <NextWeekGoals week={this.props.now.startOf('week')} />
+                </div>
                 <div className="flex flex-row">
                     {days}
                 </div>

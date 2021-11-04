@@ -40,12 +40,6 @@ class ActivityItem extends React.Component {
     }
 }
 
-ActivityItem.propTypes = {
-    name: PropTypes.string,
-    start: PropTypes.object,
-    end: PropTypes.object,
-}
-
 class ActivityItems extends React.Component {
     render() {
         const activity = this.props.activity;
@@ -68,6 +62,12 @@ class ActivityItems extends React.Component {
             </div>
         );
     }
+}
+
+ActivityItem.propTypes = {
+    name: PropTypes.string,
+    start: PropTypes.object,
+    end: PropTypes.object,
 }
 
 ActivityItems.propTypes = {

@@ -48,6 +48,8 @@ usage (collection) > YYYY-MM-DD (document) > activity (collection) > HH-mm-ss
 
 ## Todo
 
+### 1.0
+
 - [x] Users can see their activity for a day as a list
 - [x] Users cam enter their activity
     - [x] There is a form for users to enter activity
@@ -60,4 +62,8 @@ usage (collection) > YYYY-MM-DD (document) > activity (collection) > HH-mm-ss
 - [x] Looks pretty
 - [x] "Average" day breakdown
 - [x] User login (via environment variables)
-- [ ] Can set time goals for week
+
+### 1.1
+
+- [ ] Can set time goals for next week
+- [ ] Can view time goals for this week
