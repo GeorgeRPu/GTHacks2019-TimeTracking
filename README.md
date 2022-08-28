@@ -67,3 +67,4 @@ usage (collection) > YYYY-MM-DD (document) > activity (collection) > HH-mm-ss
 
 - [ ] Can set time goals for next week
 - [ ] Can view time goals for this week
+- [x] Current week button
